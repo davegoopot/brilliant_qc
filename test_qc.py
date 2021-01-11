@@ -15,6 +15,9 @@ class Qubit:
 
 Qubit.ZERO_KET = Qubit(1, 0)
 Qubit.ONE_KET = Qubit(0, 1)
+_ONE_OVER_ROOT_2 = 1 / math.sqrt(2)
+Qubit.POSITIVE_HADAMARD = Qubit(_ONE_OVER_ROOT_2, _ONE_OVER_ROOT_2)
+Qubit.NEGATIVE_HADAMARD = Qubit(_ONE_OVER_ROOT_2, -_ONE_OVER_ROOT_2)
 
     
 def test_computational_states():
@@ -30,3 +33,12 @@ def test_computational_states():
     
     assert one.probability_measure_zero() == 0
     assert one.probability_measure_one() == 1
+
+
+def test_hadamard_states():
+    positive_one_over_root_2 = 1 / math.sqrt(2)
+    assert Qubit.POSITIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
+    assert Qubit.POSITIVE_HADAMARD.one_coefficient == positive_one_over_root_2
+
+    assert Qubit.NEGATIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
+    assert Qubit.NEGATIVE_HADAMARD.one_coefficient == -positive_one_over_root_2
