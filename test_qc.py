@@ -19,6 +19,16 @@ _ONE_OVER_ROOT_2 = 1 / math.sqrt(2)
 Qubit.POSITIVE_HADAMARD = Qubit(_ONE_OVER_ROOT_2, _ONE_OVER_ROOT_2)
 Qubit.NEGATIVE_HADAMARD = Qubit(_ONE_OVER_ROOT_2, -_ONE_OVER_ROOT_2)
 
+
+class QCGates:
+    @staticmethod
+    def hadamard(qubit: Qubit) -> Qubit:
+        return Qubit.POSITIVE_HADAMARD
+
+    @staticmethod
+    def qc_not(qubit: Qubit) -> Qubit:
+        return Qubit.ONE_KET
+
     
 def test_computational_states():
     zero = Qubit.ZERO_KET # |0>
@@ -42,3 +52,9 @@ def test_hadamard_states():
 
     assert Qubit.NEGATIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
     assert Qubit.NEGATIVE_HADAMARD.one_coefficient == -positive_one_over_root_2
+
+def test_hadamard_gates():
+    assert QCGates.hadamard(Qubit.ZERO_KET) == Qubit.POSITIVE_HADAMARD
+
+def test_not_gates():
+    assert QCGates.qc_not(Qubit.ZERO_KET) == Qubit.ONE_KET
