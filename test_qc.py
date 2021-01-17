@@ -27,7 +27,7 @@ class QCGates:
 
     @staticmethod
     def qc_not(qubit: Qubit) -> Qubit:
-        return Qubit.ONE_KET
+        return Qubit.ZERO_KET if qubit == Qubit.ONE_KET else Qubit.ONE_KET
 
     
 def test_computational_states():
@@ -58,3 +58,4 @@ def test_hadamard_gates():
 
 def test_not_gates():
     assert QCGates.qc_not(Qubit.ZERO_KET) == Qubit.ONE_KET
+    assert QCGates.qc_not(Qubit.ONE_KET) == Qubit.ZERO_KET
