@@ -23,7 +23,7 @@ Qubit.NEGATIVE_HADAMARD = Qubit(_ONE_OVER_ROOT_2, -_ONE_OVER_ROOT_2)
 class QCGates:
     @staticmethod
     def hadamard(qubit: Qubit) -> Qubit:
-        return Qubit.POSITIVE_HADAMARD
+        return Qubit.POSITIVE_HADAMARD if qubit == qubit.ZERO_KET else Qubit.NEGATIVE_HADAMARD
 
     @staticmethod
     def qc_not(qubit: Qubit) -> Qubit:
@@ -55,6 +55,7 @@ def test_hadamard_states():
 
 def test_hadamard_gates():
     assert QCGates.hadamard(Qubit.ZERO_KET) == Qubit.POSITIVE_HADAMARD
+    assert QCGates.hadamard(Qubit.ONE_KET) == Qubit.NEGATIVE_HADAMARD
 
 def test_not_gates():
     assert QCGates.qc_not(Qubit.ZERO_KET) == Qubit.ONE_KET
