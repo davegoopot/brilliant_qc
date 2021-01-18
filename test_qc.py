@@ -65,6 +65,7 @@ def test_hadamard_states():
 def test_hadamard_gates():
     assert Qubit.ZERO_KET.hadamard() == Qubit.POSITIVE_HADAMARD
     assert Qubit.ONE_KET.hadamard() == Qubit.NEGATIVE_HADAMARD
+    assert Qubit.ZERO_KET.qc_not().hadamard() == Qubit.NEGATIVE_HADAMARD
 
 def test_not_gates():
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
