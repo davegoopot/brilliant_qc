@@ -13,6 +13,15 @@ class Qubit:
     def probability_measure_one(self):
         return self.one_coefficient ** 2 / (self.zero_coefficient ** 2 + self.one_coefficient ** 2)
 
+    def hadamard(self):
+        """Apply the hadamard gate to this Qubit"""
+        return QCGates.hadamard(self)
+
+    def qc_not(self):
+        """Apply the quantum computing not gate to this Qubit"""
+        return QCGates.qc_not(self)
+
+
 Qubit.ZERO_KET = Qubit(1, 0)
 Qubit.ONE_KET = Qubit(0, 1)
 _ONE_OVER_ROOT_2 = 1 / math.sqrt(2)
@@ -54,9 +63,10 @@ def test_hadamard_states():
     assert Qubit.NEGATIVE_HADAMARD.one_coefficient == -positive_one_over_root_2
 
 def test_hadamard_gates():
-    assert QCGates.hadamard(Qubit.ZERO_KET) == Qubit.POSITIVE_HADAMARD
-    assert QCGates.hadamard(Qubit.ONE_KET) == Qubit.NEGATIVE_HADAMARD
+    assert Qubit.ZERO_KET.hadamard() == Qubit.POSITIVE_HADAMARD
+    assert Qubit.ONE_KET.hadamard() == Qubit.NEGATIVE_HADAMARD
 
 def test_not_gates():
-    assert QCGates.qc_not(Qubit.ZERO_KET) == Qubit.ONE_KET
-    assert QCGates.qc_not(Qubit.ONE_KET) == Qubit.ZERO_KET
+    assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
+    assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
+    
