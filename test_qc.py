@@ -26,7 +26,9 @@ class Qubit:
         return QCGates.hadamard(self)
 
     def qc_not(self):
-        """Apply the quantum computing not gate to this Qubit"""
+        """Apply the quantum computing not gate to this Qubit
+        In the Brilliant course this is gate "X"
+        """
         return QCGates.qc_not(self)
 
     def as_array(self) -> np.ndarray:
