@@ -37,6 +37,9 @@ class Qubit:
             ]
         )
 
+    def identity(self):
+        return QCGates.identity(self)
+
 
 Qubit.ZERO_KET = Qubit(1, 0)
 Qubit.ONE_KET = Qubit(0, 1)
@@ -66,7 +69,11 @@ class QCGates:
     def qc_not(qubit: Qubit) -> Qubit:
         return Qubit.ZERO_KET if qubit == Qubit.ONE_KET else Qubit.ONE_KET
 
-    
+    @staticmethod
+    def identity(qubit: Qubit) -> Qubit:
+        return qubit
+
+
 def test_computational_states():
     zero = Qubit.ZERO_KET # |0>
     assert zero.probability_measure_zero() == 1
@@ -98,4 +105,7 @@ def test_hadamard_gates():
 def test_not_gates():
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
+
+def test_identity_gate():
+    assert Qubit.ZERO_KET.identity() == Qubit.ZERO_KET
     
