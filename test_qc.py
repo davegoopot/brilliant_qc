@@ -137,3 +137,6 @@ def test_phase_gate():
 def test_probability_changes():
     assert Qubit.ONE_KET.change_phase().probability_measure_zero() == Qubit.ONE_KET.probability_measure_zero()
     assert Qubit.ONE_KET.change_phase().probability_measure_one() == Qubit.ONE_KET.probability_measure_one()
+
+def test_multiple_gates():
+    assert Qubit.ZERO_KET.qc_not().change_phase().hadamard() == Qubit(-1/math.sqrt(2), 1/math.sqrt(2))
