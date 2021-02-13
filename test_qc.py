@@ -106,7 +106,7 @@ def test_hadamard_gates():
 
 def test_not_gates():
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
-    assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
+    assert Qubit.ONE_KET.qc_not() == Qubit.ZERO_KET
 
 def test_identity_gate():
     assert Qubit.ZERO_KET.identity() == Qubit.ZERO_KET
