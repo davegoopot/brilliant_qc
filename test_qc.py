@@ -123,6 +123,7 @@ def test_not_gates():
 
 def test_identity_gate():
     assert Qubit.ZERO_KET.identity() == Qubit.ZERO_KET
+    assert Qubit.ONE_KET.identity() == Qubit.ONE_KET
     
 
 def test_phase_gate():
