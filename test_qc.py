@@ -129,3 +129,7 @@ def test_identity_gate():
 def test_phase_gate():
     assert Qubit.ZERO_KET.change_phase() == Qubit.ZERO_KET
     assert Qubit.ONE_KET.change_phase() == Qubit(0, -1)
+
+def test_probability_changes():
+    assert Qubit.ONE_KET.change_phase().probability_measure_zero() == Qubit.ONE_KET.probability_measure_zero()
+    assert Qubit.ONE_KET.change_phase().probability_measure_one() == Qubit.ONE_KET.probability_measure_one()
