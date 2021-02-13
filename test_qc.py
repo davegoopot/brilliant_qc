@@ -42,6 +42,9 @@ class Qubit:
     def identity(self):
         return QCGates.identity(self)
 
+    def change_phase(self):
+        return QCGates.change_phase(self)
+
 
 Qubit.ZERO_KET = Qubit(1, 0)
 Qubit.ONE_KET = Qubit(0, 1)
@@ -75,6 +78,16 @@ class QCGates:
     def identity(qubit: Qubit) -> Qubit:
         return qubit
 
+    Z_MATRIX = np.array(
+        [
+            [1, 0],
+            [0, -1]
+        ]
+    )
+
+    @staticmethod
+    def change_phase(qubit: Qubit) -> Qubit:
+        return QCGates.matmul(qubit, QCGates.Z_MATRIX)
 
 def test_computational_states():
     zero = Qubit.ZERO_KET # |0>
@@ -111,3 +124,7 @@ def test_not_gates():
 def test_identity_gate():
     assert Qubit.ZERO_KET.identity() == Qubit.ZERO_KET
     
+
+def test_phase_gate():
+    assert Qubit.ZERO_KET.change_phase() == Qubit.ZERO_KET
+    assert Qubit.ONE_KET.change_phase() == Qubit(0, -1)
