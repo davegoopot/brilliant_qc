@@ -1,4 +1,4 @@
-from dataclasses import asdict, dataclass
+from dataclasses import astuple, dataclass
 import math
 import numpy as np
 import pytest
@@ -14,6 +14,10 @@ class Qubit:
         if array.shape != (2, 1):
             raise ValueError(f"Array must be 2 by 1 to create Qubit. Value passed {array}")
         return Qubit(array[0][0], array[1][0])
+
+
+    def approx(self, other):
+        return astuple(self) == pytest.approx(astuple(other))
 
     def probability_measure_zero(self):
         return self.zero_coefficient ** 2 / (self.zero_coefficient ** 2 + self.one_coefficient ** 2)
@@ -117,7 +121,7 @@ def test_hadamard_gates():
     assert Qubit.ZERO_KET.hadamard() == Qubit.POSITIVE_HADAMARD
     assert Qubit.ONE_KET.hadamard() == Qubit.NEGATIVE_HADAMARD
     assert Qubit.ZERO_KET.qc_not().hadamard() == Qubit.NEGATIVE_HADAMARD
-    assert asdict(Qubit.POSITIVE_HADAMARD.hadamard()) == pytest.approx(asdict(Qubit.ZERO_KET))
+    assert Qubit.POSITIVE_HADAMARD.hadamard().approx(Qubit.ZERO_KET)
 
 def test_not_gates():
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
@@ -142,3 +146,16 @@ def test_probability_changes():
 
 def test_multiple_gates():
     assert Qubit.ZERO_KET.qc_not().change_phase().hadamard() == Qubit(-1/math.sqrt(2), 1/math.sqrt(2))
+
+def test_approx_equal_testing_method():
+    v1 = 1
+    v2 = 1.0000001
+    assert v1 == pytest.approx(v2)
+    
+    q1 = Qubit(v1, 0)
+    q2 = Qubit(v2, 0)
+    assert not(q1 == q2)
+    assert astuple(q1) == (v1, 0)
+    assert not(astuple(q1) == astuple(q2))
+    assert astuple(q1) == pytest.approx(astuple(q2))
+    assert q1.approx(q2)
