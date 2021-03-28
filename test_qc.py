@@ -16,8 +16,14 @@ class Qubit:
         return Qubit(array[0][0], array[1][0])
 
 
-    def approx(self, other):
-        return astuple(self) == pytest.approx(astuple(other))
+    def __iter__(self):
+        # Needed to support pytest.approx
+        return iter(astuple(self))
+   
+   
+    def __len__(self):
+        # Needed to support pytest.approx
+        return len(astuple(self))
 
     def probability_measure_zero(self):
         return self.zero_coefficient ** 2 / (self.zero_coefficient ** 2 + self.one_coefficient ** 2)
@@ -121,7 +127,7 @@ def test_hadamard_gates():
     assert Qubit.ZERO_KET.hadamard() == Qubit.POSITIVE_HADAMARD
     assert Qubit.ONE_KET.hadamard() == Qubit.NEGATIVE_HADAMARD
     assert Qubit.ZERO_KET.qc_not().hadamard() == Qubit.NEGATIVE_HADAMARD
-    assert Qubit.POSITIVE_HADAMARD.hadamard().approx(Qubit.ZERO_KET)
+    assert Qubit.POSITIVE_HADAMARD.hadamard() == pytest.approx(Qubit.ZERO_KET)
 
 def test_not_gates():
     assert Qubit.ZERO_KET.qc_not() == Qubit.ONE_KET
@@ -158,4 +164,4 @@ def test_approx_equal_testing_method():
     assert astuple(q1) == (v1, 0)
     assert not(astuple(q1) == astuple(q2))
     assert astuple(q1) == pytest.approx(astuple(q2))
-    assert q1.approx(q2)
+    assert q1 == pytest.approx(q2)
