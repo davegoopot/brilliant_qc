@@ -23,6 +23,9 @@ def H(q: Qubit):
 def qc_not(qubit: Qubit) -> Qubit:
     return ZERO_KET if qubit == ONE_KET else ONE_KET
 
+def X(q: Qubit):
+    return qc_not(q)
+
 
 def identity(qubit: Qubit) -> Qubit:
     return qubit
