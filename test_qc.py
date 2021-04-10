@@ -1,7 +1,8 @@
 import math
 import pytest
-from qubit import ZERO_KET, ONE_KET
-from qc_gates import hadamard
+from qubit import ZERO_KET, ONE_KET, POSITIVE_HADAMARD, NEGATIVE_HADAMARD, Qubit
+from qc_gates import hadamard, H, qc_not, identity, change_phase
+from dataclasses import astuple
 
 def test_computational_states():
     zero = ZERO_KET # |0>
@@ -20,41 +21,41 @@ def test_computational_states():
 
 def test_hadamard_states():
     positive_one_over_root_2 = 1 / math.sqrt(2)
-    assert Qubit.POSITIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
-    assert Qubit.POSITIVE_HADAMARD.one_coefficient == positive_one_over_root_2
+    assert POSITIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
+    assert POSITIVE_HADAMARD.one_coefficient == positive_one_over_root_2
 
-    assert Qubit.NEGATIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
-    assert Qubit.NEGATIVE_HADAMARD.one_coefficient == -positive_one_over_root_2
+    assert NEGATIVE_HADAMARD.zero_coefficient == positive_one_over_root_2
+    assert NEGATIVE_HADAMARD.one_coefficient == -positive_one_over_root_2
 
 def test_hadamard_gates():
-    assert ZERO_KET.hadamard() == Qubit.POSITIVE_HADAMARD
-    assert ONE_KET.hadamard() == Qubit.NEGATIVE_HADAMARD
-    assert ZERO_KET.qc_not().hadamard() == Qubit.NEGATIVE_HADAMARD
-    assert Qubit.POSITIVE_HADAMARD.hadamard() == pytest.approx(ZERO_KET)
+    assert hadamard(ZERO_KET) == POSITIVE_HADAMARD
+    assert hadamard(ONE_KET) == NEGATIVE_HADAMARD
+    assert hadamard(qc_not(ZERO_KET)) == NEGATIVE_HADAMARD
+    assert hadamard(POSITIVE_HADAMARD) == pytest.approx(ZERO_KET)
 
 def test_not_gates():
-    assert ZERO_KET.qc_not() == ONE_KET
-    assert ONE_KET.qc_not() == ZERO_KET
+    assert qc_not(ZERO_KET) == ONE_KET
+    assert qc_not(ONE_KET) == ZERO_KET
 
 def test_identity_gate():
-    assert ZERO_KET.identity() == ZERO_KET
-    assert ONE_KET.identity() == ONE_KET
-    assert Qubit.POSITIVE_HADAMARD.identity() == Qubit.POSITIVE_HADAMARD
-    assert Qubit.NEGATIVE_HADAMARD.identity() == Qubit.NEGATIVE_HADAMARD
+    assert identity(ZERO_KET) == ZERO_KET
+    assert identity(ONE_KET) == ONE_KET
+    assert identity(POSITIVE_HADAMARD) == POSITIVE_HADAMARD
+    assert identity(NEGATIVE_HADAMARD) == NEGATIVE_HADAMARD
     
 
 def test_phase_gate():
-    assert ZERO_KET.change_phase() == ZERO_KET
-    assert ONE_KET.change_phase() == Qubit(0, -1)
-    assert Qubit.POSITIVE_HADAMARD.change_phase() == Qubit.NEGATIVE_HADAMARD
-    assert Qubit.NEGATIVE_HADAMARD.change_phase() == Qubit.POSITIVE_HADAMARD
+    assert change_phase(ZERO_KET) == ZERO_KET
+    assert change_phase(ONE_KET) == Qubit(0, -1)
+    assert change_phase(POSITIVE_HADAMARD) == NEGATIVE_HADAMARD
+    assert change_phase(NEGATIVE_HADAMARD) == POSITIVE_HADAMARD
 
 def test_probability_changes():
-    assert ONE_KET.change_phase().probability_measure_zero() == ONE_KET.probability_measure_zero()
-    assert ONE_KET.change_phase().probability_measure_one() == ONE_KET.probability_measure_one()
+    assert change_phase(ONE_KET).probability_measure_zero() == ONE_KET.probability_measure_zero()
+    assert change_phase(ONE_KET).probability_measure_one() == ONE_KET.probability_measure_one()
 
 def test_multiple_gates():
-    assert ZERO_KET.qc_not().change_phase().hadamard() == Qubit(-1/math.sqrt(2), 1/math.sqrt(2))
+    assert hadamard(change_phase(qc_not(ZERO_KET))) == Qubit(-1/math.sqrt(2), 1/math.sqrt(2))
 
 def test_approx_equal_testing_method():
     v1 = 1
@@ -71,4 +72,4 @@ def test_approx_equal_testing_method():
 
 def test_single_letter_gates():
     # H gate is Haddamard
-    assert H(ZERO_KET) == Qubit.POSITIVE_HADAMARD
+    assert H(ZERO_KET) == POSITIVE_HADAMARD
