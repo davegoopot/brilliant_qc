@@ -71,7 +71,7 @@ def test_approx_equal_testing_method():
     assert q1 == pytest.approx(q2)
 
 def test_single_letter_gates():
-    # H gate is Haddamard
+    # H gate is Hadamard
     assert H(ZERO_KET) == POSITIVE_HADAMARD
     
     # I gate is identity

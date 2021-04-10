@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "40f396d099bff82ff3398e4daeab3eb75b81e5c05ef434175f1ea65f7c88c33a"
+            "sha256": "6bf8146a11dcc5f489a0e3aaa9a689876eb7679acb8010f7383d1fbd9c0bbdcd"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -129,11 +129,11 @@
     "develop": {
         "astroid": {
             "hashes": [
-                "sha256:6b0ed1af831570e500e2437625979eaa3b36011f66ddfc4ce930128610258ca9",
-                "sha256:cd80bf957c49765dce6d92c43163ff9d2abc43132ce64d4b1b47717c6d2522df"
+                "sha256:ad63b8552c70939568966811a088ef0bc880f99a24a00834abd0e3681b514f91",
+                "sha256:bea3f32799fbb8581f58431c12591bc20ce11cbc90ad82e2ea5717d94f2080d5"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==2.5.2"
+            "version": "==2.5.3"
         },
         "colorama": {
             "hashes": [
@@ -193,6 +193,13 @@
             ],
             "index": "pypi",
             "version": "==2.7.4"
+        },
+        "rope": {
+            "hashes": [
+                "sha256:786b5c38c530d4846aa68a42604f61b4e69a493390e3ca11b88df0fbfdc3ed04"
+            ],
+            "index": "pypi",
+            "version": "==0.18.0"
         },
         "toml": {
             "hashes": [
