@@ -1,7 +1,7 @@
 import math
 import pytest
 from qubit import ZERO_KET, ONE_KET, POSITIVE_HADAMARD, NEGATIVE_HADAMARD, Qubit
-from qc_gates import hadamard, H, qc_not, X,  identity, I, change_phase
+from qc_gates import hadamard, H, qc_not, X,  identity, I, change_phase, Z
 from dataclasses import astuple
 
 def test_computational_states():
@@ -79,3 +79,6 @@ def test_single_letter_gates():
 
     # X gate is quantum not
     assert X(ZERO_KET) == ONE_KET
+
+    # Z gate is change phase
+    assert Z(ONE_KET) == Qubit(0, -1)

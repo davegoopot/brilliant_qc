@@ -43,3 +43,6 @@ Z_MATRIX = np.array(
 
 def change_phase(qubit: Qubit) -> Qubit:
     return matmul(qubit, Z_MATRIX)
+
+def Z(q:Qubit):
+    return change_phase(q)
