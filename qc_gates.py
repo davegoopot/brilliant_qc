@@ -27,6 +27,9 @@ def qc_not(qubit: Qubit) -> Qubit:
 def identity(qubit: Qubit) -> Qubit:
     return qubit
 
+def I(q: Qubit):
+    return identity(q)
+
 Z_MATRIX = np.array(
     [
         [1, 0],
