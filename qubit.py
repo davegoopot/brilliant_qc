@@ -4,7 +4,6 @@ import numpy as np
 
 @dataclass
 class Qubit:
-    #TODO: Need to split out test and logic code
     #TODO: Make into module with propper imports
     #TODO: Need to get linting running
     #TODO: Get type hinting working
