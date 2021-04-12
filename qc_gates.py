@@ -1,11 +1,13 @@
 import numpy as np
 from qubit import Qubit, ONE_KET, ZERO_KET
 
+# fmt: off
 HADAMARD_MATRIX = 1/np.sqrt(2) * np.array(
         [
             [1, 1],
             [1, -1]
         ])
+# fmt: off
 
 def matmul(qubit: Qubit, matrix: np.ndarray) -> Qubit:
     q_array = qubit.as_array()
@@ -33,16 +35,19 @@ def identity(qubit: Qubit) -> Qubit:
 def I(q: Qubit):
     return identity(q)
 
+# fmt: off
 Z_MATRIX = np.array(
     [
         [1, 0],
         [0, -1]
     ]
 )
+# fmt: on
 
 
 def change_phase(qubit: Qubit) -> Qubit:
     return matmul(qubit, Z_MATRIX)
 
-def Z(q:Qubit):
+
+def Z(q: Qubit):
     return change_phase(q)

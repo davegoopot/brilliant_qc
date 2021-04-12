@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 pytest = "*"
 numpy = "*"
+black = "*"
 
 [dev-packages]
-pylint = "*"
 rope = "*"
 
 [requires]
