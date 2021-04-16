@@ -103,3 +103,4 @@ def test_S_gate():
     # S gate is square root of Z
 
     assert S(POSITIVE_HADAMARD) == Qubit(1/math.sqrt(2), 1/math.sqrt(2)*1j)
+    assert S(S(POSITIVE_HADAMARD)) == Z(POSITIVE_HADAMARD)
