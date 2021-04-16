@@ -51,3 +51,18 @@ def change_phase(qubit: Qubit) -> Qubit:
 
 def Z(q: Qubit):
     return change_phase(q)
+
+
+# fmt: off
+S_MATRIX = np.array(
+    [
+        [1, 0],
+        [0, 1j]
+    ]
+)
+# fmt: on
+
+def S(q: Qubit):
+    return matmul(q, S_MATRIX)
+
+

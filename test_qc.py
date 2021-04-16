@@ -1,7 +1,7 @@
 import math
 import pytest
 from qubit import ZERO_KET, ONE_KET, POSITIVE_HADAMARD, NEGATIVE_HADAMARD, Qubit
-from qc_gates import hadamard, H, qc_not, X, identity, I, change_phase, Z
+from qc_gates import hadamard, H, qc_not, X, identity, I, change_phase, Z, S
 from dataclasses import astuple
 
 
@@ -98,3 +98,8 @@ def test_single_letter_gates():
 
     # Z gate is change phase
     assert Z(ONE_KET) == Qubit(0, -1)
+
+def test_S_gate():
+    # S gate is square root of Z
+
+    assert S(POSITIVE_HADAMARD) == Qubit(1/math.sqrt(2), 1/math.sqrt(2)*1j)
